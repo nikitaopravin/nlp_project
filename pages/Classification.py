@@ -236,7 +236,7 @@ with col3:
         
     
     API_TOKEN = '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'
-    API_TOKEN = st.secrets["BERT_TOKEN"]
+    #API_TOKEN = st.secrets["BERT_TOKEN"]
     API_URL = "https://api-inference.huggingface.co/models/blanchefort/rubert-base-cased-sentiment"
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
