@@ -21,7 +21,7 @@ import string
 from nltk.corpus import stopwords
 #stop_words = set(stopwords.words('english'))
 
-st.set_page_config(layout='wide')
+#st.set_page_config(layout='wide')
 
 def data_preprocessing(text: str) -> str:
     """preprocessing string: lowercase, removing html-tags, punctuation and stopwords
@@ -159,7 +159,7 @@ st.write('''
 # Классификация текста NLP моделями
 Вашему вниманию представлено три подхода к анализу пользовательских отзывов. Результат работы каждого из них - 
 классификация предоставленного текстового фрагмента на русском языке как негативного или позитивного.
-Представленная модель называется ... и была обучена ... 
+
 Давайте проверим, как работает каждая из моделей. Введите произвольный текст в поле ниже 
 (или вставьте скопированный).
 ''')
@@ -236,6 +236,7 @@ with col3:
         
     
     API_TOKEN = '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'
+    API_TOKEN = st.secrets["BERT_TOKEN"]
     API_URL = "https://api-inference.huggingface.co/models/blanchefort/rubert-base-cased-sentiment"
     headers = {"Authorization": f"Bearer {API_TOKEN}"}
 
