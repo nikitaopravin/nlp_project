@@ -15,7 +15,7 @@ if not os.path.isfile(path):
     gdown.download(url=url, output=path, fuzzy=True)
 
 status = st.radio('Личность модели', ('Regular', 'I want to believe'))
-answer_len = st.slider('Разговорчивость', 0, 200, 50)
+answer_len = st.slider('Разговорчивость', 0, 100, 50)
 temp = st.slider('Креативность', 1., 10., 1.)
 
 if status == 'Regular':
