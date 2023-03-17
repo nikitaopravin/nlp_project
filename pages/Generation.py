@@ -6,36 +6,45 @@ import textwrap
 import gdown
 import os
 
+
+stock_model_path = '../data/stock_model/'
+if not os.path.isdir(stock_model_path):
+    url = "https://drive.google.com/drive/folders/1U4rp3CwKLBY9w3AN7KvBlo2cyjE_XW0t?usp=share_link"
+    gdown.download(url=url, output=stock_model_path, fuzzy=True)
+
+trained_model_path = '../data/trained_model/'
+if not os.path.isdir(trained_model_path):
+    url = "https://drive.google.com/drive/folders/1-bLrYaO9XNOJ1q_w4rFGwvdzr4qJjl2b?usp=share_link"
+    gdown.download(url=url, output=trained_model_path, fuzzy=True)
+
+tokenizer_path = '../data/tokenizer/'
+if not os.path.isdir(tokenizer_path):
+    url = "https://drive.google.com/drive/folders/1-hvEuHJ_K9BsbneYKLoG8bOivRdjJ2To?usp=share_link"
+    gdown.download(url=url, output=tokenizer_path, fuzzy=True)
+
+tokenizer = GPT2Tokenizer.from_pretrained(tokenizer_path)
+
 st.header('Цифровой собеседник')
 
-
-path = './data/gen_model.pt'
-if not os.path.isfile(path):
-    url = "https://drive.google.com/file/d/1zS7vuIJ7jgmvGgcS4CpzIs_wg8VdWqBI/view?usp=share_link"
-    gdown.download(url=url, output=path, fuzzy=True)
-
-status = st.radio('Личность модели', ('Regular', 'I want to believe'))
+status = st.radio('Личность модели', ('😀 Regular ', '👽 I want to believe'))
 answer_len = st.slider('Разговорчивость', 0, 100, 50)
-temp = st.slider('Креативность', 1., 10., 1.)
+temp = float(st.slider('Креативность', 1, 5, 2))
 
-if status == 'Regular':
+if status == '😀 Regular':
 
-    tokenizer = GPT2Tokenizer.from_pretrained('sberbank-ai/rugpt3small_based_on_gpt2')
     model = GPT2LMHeadModel.from_pretrained(
-        'sberbank-ai/rugpt3small_based_on_gpt2',
+        stock_model_path,
         output_attentions = False,
         output_hidden_states = False,
     )
 
 else:
 
-    tokenizer = GPT2Tokenizer.from_pretrained('sberbank-ai/rugpt3small_based_on_gpt2')
     model = GPT2LMHeadModel.from_pretrained(
-        'sberbank-ai/rugpt3small_based_on_gpt2',
+        trained_model_path,
         output_attentions = False,
         output_hidden_states = False,
     )
-    model.load_state_dict(torch.load(path,  map_location=torch.device('cpu')))
 
 prompt = st.text_input('Введите фразу', 'Привет')
 
@@ -48,7 +57,7 @@ with torch.inference_mode():
         do_sample=True,
         temperature=temp,
         top_k=30,
-        top_p=0.95 / (temp / 8),
+        top_p=0.19 * temp,
         no_repeat_ngram_size=3,
         num_return_sequences=1,
         ).cpu().numpy()
