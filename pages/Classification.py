@@ -19,7 +19,7 @@ import torch.nn as nn
 import re
 import string
 from nltk.corpus import stopwords
-stop_words = set(stopwords.words('english'))
+#stop_words = set(stopwords.words('english'))
 
 st.set_page_config(layout='wide')
 
@@ -36,7 +36,7 @@ def data_preprocessing(text: str) -> str:
     text = text.lower()
     text = re.sub('<.*?>', '', text) # html tags
     text = ''.join([c for c in text if c not in string.punctuation])# Remove punctuation
-    text = [word for word in text.split() if word not in stop_words] 
+    #text = [word for word in text.split() if word not in stop_words] 
     text = ' '.join(text)
     return text
 
