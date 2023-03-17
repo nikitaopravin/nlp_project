@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import time
 
 st.write('''
 # NLP модель TextSummary
@@ -21,7 +22,7 @@ txt_value = ''
 
 txt = st.text_area(label=txt_label, value=txt_value, height=400)
 
-API_TOKEN = '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'
+API_TOKEN = ''
 
 API_URL = "https://api-inference.huggingface.co/models/cointegrated/rut5-base-absum"
 headers = {"Authorization": f"Bearer {API_TOKEN}"}
@@ -31,7 +32,17 @@ def query(payload):
 	return response.json()
 
 if txt != '':
-    response = query({"inputs":f'{txt}'})
-    print(response)
-    output = response[0]['summary_text']
-    st.markdown(f'Резюме модели: `{output}`')
+    
+    for i in range(10):
+        response = query({"inputs":f'{txt}'})
+        st.write(response)
+        if '0' not in response.keys:
+            st.markdown(":red[Ждем ответа модели..]")
+            time.sleep(2)
+            
+        else:
+            output = response[0]['summary_text']
+            st.markdown(f'Резюме модели: `{output}`')
+            break  
+
+    
