@@ -9,12 +9,12 @@ import os
 
 stock_model_path = 'data/stock_model/'
 if not os.path.isdir(stock_model_path):
-    url = "https://drive.google.com/drive/folders/1U4rp3CwKLBY9w3AN7KvBlo2cyjE_XW0t?usp=share_link"
+    url = "https://drive.google.com/drive/folders/10C2vPQD2HK32HIbVbzJPiJLRcWIO0Ak1?usp=share_link"
     gdown.download_folder(url=url, output='data/')
 
 trained_model_path = 'data/trained_model/'
 if not os.path.isdir(trained_model_path):
-    url = "https://drive.google.com/drive/folders/1-bLrYaO9XNOJ1q_w4rFGwvdzr4qJjl2b?usp=share_link"
+    url = "https://drive.google.com/drive/folders/1-qzRCug2FQeSP3kFRqt4TdcRbTdzxs2j?usp=share_link"
     gdown.download_folder(url=url, output='data/')
 
 # tokenizer_path = '../data/tokenizer/'
@@ -56,7 +56,7 @@ with torch.inference_mode():
         num_beams=5,
         do_sample=True,
         temperature=temp,
-        top_k=30,
+        top_k=20 * int(temp),
         top_p=0.19 * temp,
         no_repeat_ngram_size=3,
         num_return_sequences=1,
