@@ -7,27 +7,27 @@ import gdown
 import os
 
 
-stock_model_path = './data/stock_model/'
+stock_model_path = '../data/stock_model/'
 if not os.path.isdir(stock_model_path):
     url = "https://drive.google.com/drive/folders/1U4rp3CwKLBY9w3AN7KvBlo2cyjE_XW0t?usp=share_link"
-    gdown.download(url=url, output=stock_model_path, fuzzy=True)
+    gdown.download_folder(url=url, output=stock_model_path)
 
-trained_model_path = './data/trained_model/'
+trained_model_path = '../data/trained_model/'
 if not os.path.isdir(trained_model_path):
     url = "https://drive.google.com/drive/folders/1-bLrYaO9XNOJ1q_w4rFGwvdzr4qJjl2b?usp=share_link"
-    gdown.download(url=url, output=trained_model_path, fuzzy=True)
+    gdown.download_folder(url=url, output=trained_model_path)
 
-# tokenizer_path = '../data/tokenizer/'
-# if not os.path.isdir(tokenizer_path):
-#     url = "https://drive.google.com/drive/folders/1-hvEuHJ_K9BsbneYKLoG8bOivRdjJ2To?usp=share_link"
-#     gdown.download(url=url, output=tokenizer_path, fuzzy=True)
+tokenizer_path = '../data/tokenizer/'
+if not os.path.isdir(tokenizer_path):
+    url = "https://drive.google.com/drive/folders/1-hvEuHJ_K9BsbneYKLoG8bOivRdjJ2To?usp=share_link"
+    gdown.download_folder(url=url, output=tokenizer_path)
 
-tokenizer = GPT2Tokenizer.from_pretrained('sberbank-ai/rugpt3small_based_on_gpt2')
+tokenizer = GPT2Tokenizer.from_pretrained(tokenizer_path)
 
 st.header('Цифровой собеседник')
 
 status = st.radio('Личность модели', ('😀 Regular ', '👽 I want to believe'))
-answer_len = st.slider('Разговорчивость', 0, 100, 50)
+answer_len = st.slider('Разговорчивость (кол-во слов)', 0, 100, 50)
 temp = float(st.slider('Креативность', 1, 5, 2))
 
 if status == '😀 Regular':
