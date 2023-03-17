@@ -11,7 +11,7 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 st.header('Цифровой собеседник')
 
 
-path = '../data/gen_model.pt'
+path = './data/gen_model.pt'
 if not os.path.isfile(path):
     url = "https://drive.google.com/file/d/1zS7vuIJ7jgmvGgcS4CpzIs_wg8VdWqBI/view?usp=share_link"
     gdown.download(url=url, output=path, fuzzy=True)
