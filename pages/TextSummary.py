@@ -18,6 +18,7 @@ st.write('''
 
 txt_label = '''Ваш текст:'''
 
+SUM_TOKEN = st.secrets["SUM_TOKEN"]
 
 API_URL = "https://api-inference.huggingface.co/models/cointegrated/rut5-base-absum"
 headers = {"Authorization": f"Bearer {SUM_TOKEN}"}
