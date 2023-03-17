@@ -6,8 +6,6 @@ import textwrap
 import gdown
 import os
 
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
 st.header('Цифровой собеседник')
 
 
@@ -41,9 +39,8 @@ else:
 
 prompt = st.text_input('Введите фразу', 'Привет')
 
-model.to(device)
 with torch.inference_mode():
-    prompt = tokenizer.encode(prompt, return_tensors='pt').to(device)
+    prompt = tokenizer.encode(prompt, return_tensors='pt')
     out = model.generate(
         input_ids=prompt,
         max_length=answer_len,
