@@ -17,10 +17,10 @@ st.write('''
 
 txt_label = '''Ваш текст:'''
 
-API_TOKEN = ''
+SUM_TOKEN = ''
 
 API_URL = "https://api-inference.huggingface.co/models/cointegrated/rut5-base-absum"
-headers = {"Authorization": f"Bearer {API_TOKEN}"}
+headers = {"Authorization": f"Bearer {SUM_TOKEN}"}
 
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
