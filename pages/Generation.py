@@ -7,12 +7,12 @@ import gdown
 import os
 
 
-stock_model_path = '/data/stock_model/'
+stock_model_path = 'data/stock_model/'
 if not os.path.isdir(stock_model_path):
     url = "https://drive.google.com/drive/folders/1U4rp3CwKLBY9w3AN7KvBlo2cyjE_XW0t?usp=share_link"
     gdown.download_folder(url=url, output=stock_model_path)
 
-trained_model_path = '/data/trained_model/'
+trained_model_path = 'data/trained_model/'
 if not os.path.isdir(trained_model_path):
     url = "https://drive.google.com/drive/folders/1-bLrYaO9XNOJ1q_w4rFGwvdzr4qJjl2b?usp=share_link"
     gdown.download_folder(url=url, output=trained_model_path)
