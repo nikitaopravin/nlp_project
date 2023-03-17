@@ -17,12 +17,12 @@ if not os.path.isdir(trained_model_path):
     url = "https://drive.google.com/drive/folders/1-bLrYaO9XNOJ1q_w4rFGwvdzr4qJjl2b?usp=share_link"
     gdown.download_folder(url=url, output=trained_model_path)
 
-tokenizer_path = '../data/tokenizer/'
-if not os.path.isdir(tokenizer_path):
-    url = "https://drive.google.com/drive/folders/1-hvEuHJ_K9BsbneYKLoG8bOivRdjJ2To?usp=share_link"
-    gdown.download_folder(url=url, output=tokenizer_path)
+# tokenizer_path = '../data/tokenizer/'
+# if not os.path.isdir(tokenizer_path):
+#     url = "https://drive.google.com/drive/folders/1-hvEuHJ_K9BsbneYKLoG8bOivRdjJ2To?usp=share_link"
+#     gdown.download_folder(url=url, output=tokenizer_path)
 
-tokenizer = GPT2Tokenizer.from_pretrained(tokenizer_path)
+tokenizer = GPT2Tokenizer.from_pretrained('sberbank-ai/rugpt3small_based_on_gpt2')
 
 st.header('Цифровой собеседник')
 
