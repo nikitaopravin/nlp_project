@@ -35,7 +35,7 @@ else:
         output_attentions = False,
         output_hidden_states = False,
     )
-    model.load_state_dict(torch.load(path))
+    model.load_state_dict(torch.load(path,  map_location=torch.device('cpu')))
 
 prompt = st.text_input('Введите фразу', 'Привет')
 
